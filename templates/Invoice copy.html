@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Creator</title>
+    <link rel="stylesheet" href="static/Invoice.css">
+</head>
+<body>
+    <div class="container"> 
+        <div class="header">
+            <h1>Invoice Creator</h1>
+            <div class="invoice-details">
+                <div>Invoice #: INV-001</div>
+                <div>Date: <span id="currentDate"></span></div>
+                <div>Customer: John Doe</div>
+            </div>
+        </div>
+        <form id="invoiceForm">
+            <div class="search-container">
+                <input type="text" id="barCode" placeholder="Barcode...">
+                <input type="text" id="productId" placeholder="Product ID ...">
+                <input type="text" id="productName" placeholder="Product Name...">
+                <input type="number" id="productQty" placeholder="Qty..." min="1">
+                <div id="suggestions"></div>
+            </div>
+            <table id="lineItems">
+                <thead>
+                    <tr>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Line items will be added here dynamically -->
+                </tbody>
+            </table>
+            <div class="form-group" >
+                <label for="totalAmount"><b>Total Amount:</b></label>
+                <input type="text" id="totalAmount" readonly>
+            </div>
+            <button type="submit">Create Invoice</button>
+        </form>
+    </div>
+    <script src="static/Invoice.js"></script>
+</body>
+</html>
