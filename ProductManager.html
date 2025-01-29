@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management</title>
+    <link rel="stylesheet" href="static/ProductManager.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h2>SELVAM STORES</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="..">Invoice</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1>Product Management</h1>
+        <div class="filter-group">
+            <label for="filterBarcode">Barcode:</label>
+            <input type="text" id="filterBarcode" placeholder="Enter Barcode" oninput="applyFilters()">
+
+            <label for="filterCode">Product Code:</label>
+            <input type="text" id="filterCode" placeholder="Enter Product Code" oninput="applyFilters()">
+
+            <label for="filterName">Product Name:</label>
+            <input type="text" id="filterName" placeholder="Enter Product Name" oninput="applyFilters()">
+
+            <label for="filterCategory">Category:</label>
+            <input type="text" id="filterCategory" placeholder="Enter Category" oninput="applyFilters()">
+        </div>
+        <button onclick="showAddPopup()">Add Products</button>
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                    <th>Barcode</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pop-up Structure -->
+    <div id="updatePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Update Product</h2>
+            <form id="updateForm">
+                <label for="updateProductId">Product ID:</label>
+                <input type="text" id="updateProductId" readonly><br>
+
+                <label for="updateName">Name:</label>
+                <input type="text" id="updateName"><br>
+
+                <label for="updateCategory">Category:</label>
+                <input type="text" id="updateCategory"><br>
+
+                <label for="updatePrice">Price:</label>
+                <input type="text" id="updatePrice"><br>
+
+                <label for="updateStock">Stock:</label>
+                <input type="text" id="updateStock"><br>
+
+                <label for="updateBarcode">Barcode:</label>
+                <input type="text" id="updateBarcode"><br>
+
+                <button type="button" onclick="updateProduct()">Update</button>
+                <button type="button" onclick="deleteProduct()">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Product Pop-up Structure -->
+    <div id="addPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Add Product</h2>
+            <form id="addForm">
+                <label for="addName">Name:</label>
+                <input type="text" id="addName"><br>
+
+                <label for="addCategory">Category:</label>
+                <input type="text" id="addCategory"><br>
+
+                <label for="addPrice">Price:</label>
+                <input type="text" id="addPrice"><br>
+
+                <label for="addStock">Stock:</label>
+                <input type="text" id="addStock"><br>
+
+                <label for="addBarcode">Barcode:</label>
+                <input type="text" id="addBarcode"><br>
+
+                <button type="button" onclick="addProduct()">Add</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="static\ProductMananger.js"></script>
+</body>
+
+</html>

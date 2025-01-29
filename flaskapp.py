@@ -36,7 +36,17 @@ def manage_products():
         conn.commit()
         conn.close()
         return jsonify(new_product), 201
-
+@app.route("/api/customers", methods=["GET"])
+def get_customers():
+    query = request.args.get("query", "")
+    conn = sqlite3.connect('billing_system.db')
+    conn.row_factory = sqlite3.Row
+    if query:
+        customers = conn.execute("SELECT * FROM Customers WHERE name LIKE ?", (f"%{query}%",)).fetchall()
+    else:
+        customers = conn.execute("SELECT * FROM Customers").fetchall()
+    conn.close()
+    return jsonify([dict(row) for row in customers])
 
 @app.route("/api/products/<int:product_id>", methods=["PUT"])
 def update_product(product_id):
