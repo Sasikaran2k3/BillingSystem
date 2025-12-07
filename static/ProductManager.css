@@ -24,12 +24,16 @@ table {
     margin-top: 20px;
 }
 
-th, td {
+th,
+td {
     padding: 10px;
     border: 1px solid #ccc;
 }
 
 th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
     background-color: #f4f4f4;
 }
 
@@ -44,14 +48,14 @@ button {
     margin: 10px 0;
     padding: 10px;
     width: 100%;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     cursor: pointer;
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: var(--secondary-color);
 }
 
 .filter-group {
@@ -61,15 +65,19 @@ button:hover {
 }
 
 .filter-group label {
-    min-width: 80px; /* Adjust as needed */
+    min-width: 80px;
+    /* Adjust as needed */
 }
 
 .filter-group input {
     flex: 1;
-    min-width: 150px; /* Adjust as needed */
+    min-width: 150px;
+    /* Adjust as needed */
 }
 
+
 /* Pop-up Styles */
+
 .popup {
     display: none;
     position: fixed;
@@ -117,7 +125,7 @@ form input {
 form button {
     padding: 10px;
     margin-right: 10px;
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     cursor: pointer;
@@ -125,26 +133,29 @@ form button {
 }
 
 form button:hover {
-    background-color: #45a049;
+    background-color: var(--secondary-color);
 }
 
+
 /* Responsive Styles */
+
 @media screen and (max-width: 600px) {
-    th, td {
+    th,
+    td {
         font-size: 14px;
         padding: 8px;
     }
-
-    input[type="text"], button {
+    input[type="text"],
+    button {
         width: 100%;
         margin-bottom: 10px;
     }
-
     .filter-group {
         flex-direction: column;
         gap: 5px;
     }
 }
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -167,4 +178,68 @@ form button:hover {
 .navbar-right a:hover {
     background-color: #575757;
     border-radius: 5px;
+}
+
+.title {
+    color: #333;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    margin-bottom: 25px;
+}
+
+input[type="text"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: #444444;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #ff4444;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-message {
+    margin-left: 10px;
 }

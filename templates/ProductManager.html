@@ -5,20 +5,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Management</title>
+    <link rel="stylesheet" href="static/colors.css">
     <link rel="stylesheet" href="static/ProductManager.css">
 </head>
 
 <body>
     <div class="navbar">
         <div class="navbar-left">
-            <h2>SELVAM STORE</h2>
+            <h2>SELVAM STORES (RETAIL)</h2>
         </div>
         <div class="navbar-right">
-            <a href="..">Invoice</a>
+            <a href="./">Invoice</a>
+            <a href="./Customer">Customer Manager</a>
+            <a href="./SalesManager">Sales Manager</a>
+            <a href="./BarcodeManager">BarCode Manager</a>
+            <a href="./Message">Message Manager</a>
+            <a href="./Analysis">Analytics Manager</a>
         </div>
     </div>
     <div class="container">
-        <h1>Product Management</h1>
+        <h1 class="title">Product Management</h1>
         <div class="filter-group">
             <label for="filterBarcode">Barcode:</label>
             <input type="text" id="filterBarcode" placeholder="Enter Barcode" oninput="applyFilters()">
@@ -32,7 +38,9 @@
             <label for="filterCategory">Category:</label>
             <input type="text" id="filterCategory" placeholder="Enter Category" oninput="applyFilters()">
         </div>
-        <button onclick="showAddPopup()">Add Products</button>
+        <button onclick="showAddPopup()">
+            <img src="static/add.png" alt="Add" style="width:14px;height:14px;vertical-align:top;margin-right:5px;">Add Products
+        </button>
         <table id="productTable">
             <thead>
                 <tr>
@@ -40,8 +48,12 @@
                     <th>Name</th>
                     <th>Category</th>
                     <th>Price</th>
+                    <th>Purchase Cost</th>
+                    <th>MRP</th>
                     <th>Stock</th>
                     <th>Barcode</th>
+                    <th>Tax (%)</th>
+                    <th>HSN Code</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -52,60 +64,90 @@
 
     <!-- Pop-up Structure -->
     <div id="updatePopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h2>Update Product</h2>
-            <form id="updateForm">
-                <label for="updateProductId">Product ID:</label>
-                <input type="text" id="updateProductId" readonly><br>
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Update Product</h2>
+        <form id="updateForm">
+            <label for="updateProductId">Product ID:</label>
+            <input type="text" id="originalProductId" readonly style="display: none;">
+            <input type="text" id="updateProductId"><br>
 
-                <label for="updateName">Name:</label>
-                <input type="text" id="updateName"><br>
+            <label for="updateName">Name:</label>
+            <input type="text" id="updateName"><br>
 
-                <label for="updateCategory">Category:</label>
-                <input type="text" id="updateCategory"><br>
+            <label for="updateCategory">Category:</label>
+            <input type="text" id="updateCategory"><br>
 
-                <label for="updatePrice">Price:</label>
-                <input type="text" id="updatePrice"><br>
+            <label for="updatePrice">Price:</label>
+            <input type="text" id="updatePrice"><br>
 
-                <label for="updateStock">Stock:</label>
-                <input type="text" id="updateStock"><br>
+            <label for="updatePurchaseCost">Purchase Cost:</label>
+            <input type="text" id="updatePurchaseCost"><br>
 
-                <label for="updateBarcode">Barcode:</label>
-                <input type="text" id="updateBarcode"><br>
+            <label for="updateMrp">MRP:</label>
+            <input type="text" id="updateMrp"><br>
 
-                <button type="button" onclick="updateProduct()">Update</button>
-                <button type="button" onclick="deleteProduct()">Delete</button>
-            </form>
+            <label for="updateStock">Stock:</label>
+            <input type="text" id="updateStock"><br>
+
+            <label for="updateBarcode">Barcode:</label>
+            <input type="text" id="updateBarcode"><br>
+
+            <label for="updateTax">Tax (%):</label>
+            <input type="number" id="updateTax" step="0.1" min="0"><br>
+
+            <label for="updateHSN">HSN Code:</label>
+            <input type="text" id="updateHSN"><br>
+
+            <button type="button" id="update" onclick="updateProduct()">Update</button>
+            <button type="button" onclick="deleteProduct()" style="background-color: red; color: white;">Delete</button>
+        </form>
+    </div>
+</div>
+
+<!-- Add Product Pop-up Structure -->
+<div id="addPopup" class="popup">
+    <div class="popup-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <h2>Add Product</h2>
+        <form id="addForm">
+            <label for="addName">Name:</label>
+            <input type="text" id="addName"><br>
+
+            <label for="addCategory">Category:</label>
+            <input type="text" id="addCategory"><br>
+
+            <label for="addPrice">Price:</label>
+            <input type="text" id="addPrice"><br>
+            
+            <label for="addPurchaseCost">Purchase Cost:</label>
+            <input type="text" id="addPurchaseCost"><br>
+
+            <label for="addMrp">MRP:</label>
+            <input type="text" id="addMrp"><br>
+
+            <label for="addStock">Stock:</label>
+            <input type="text" id="addStock"><br>
+
+            <label for="addBarcode">Barcode:</label>
+            <input type="text" id="addBarcode"><br>
+
+            <label for="addTax">Tax (%):</label>
+            <input type="number" id="addTax" step="0.1" min="0" value="5"><br>
+
+            <label for="addHSN">HSN Code:</label>
+            <input type="text" id="addHSN"><br>
+
+            <button type="button" onclick="addProduct()">Add</button>
+        </form>
+    </div>
+</div>
+
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span class="toast-message">This is an error message!</span>
         </div>
     </div>
-
-    <!-- Add Product Pop-up Structure -->
-    <div id="addPopup" class="popup">
-        <div class="popup-content">
-            <span class="close" onclick="closePopup()">&times;</span>
-            <h2>Add Product</h2>
-            <form id="addForm">
-                <label for="addName">Name:</label>
-                <input type="text" id="addName"><br>
-
-                <label for="addCategory">Category:</label>
-                <input type="text" id="addCategory"><br>
-
-                <label for="addPrice">Price:</label>
-                <input type="text" id="addPrice"><br>
-
-                <label for="addStock">Stock:</label>
-                <input type="text" id="addStock"><br>
-
-                <label for="addBarcode">Barcode:</label>
-                <input type="text" id="addBarcode"><br>
-
-                <button type="button" onclick="addProduct()">Add</button>
-            </form>
-        </div>
-    </div>
-
 
     <script src="static\ProductMananger.js"></script>
 </body>

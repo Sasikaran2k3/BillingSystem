@@ -1,0 +1,184 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 90%;
+    margin: 20px auto;
+}
+
+
+/* Navbar */
+
+.navbar {
+    background-color: #333;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.navbar-left h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.navbar-right a {
+    color: white;
+    text-decoration: none;
+    margin-left: 15px;
+    font-size: 1rem;
+}
+
+.navbar-right a:hover {
+    text-decoration: underline;
+}
+
+
+/* Page Title */
+
+.title {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+
+/* Table Styling */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th,
+td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: var(--primary-color);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+
+/* Filter Group Styling */
+
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-group label {
+    margin-right: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.filter-group input[type="text"],
+.filter-group input[type="date"],
+.filter-group input[type="checkbox"] {
+    width: auto;
+    min-width: 150px;
+    padding: 6px 8px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+}
+
+.filter-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+}
+
+
+/* Input Containers */
+
+.input-container,
+.checkbox-container,
+.date-range-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+
+/* Labels inside Date Range */
+
+.date-range-label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+/* Inputs General */
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+
+/* Buttons */
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    background-color: var(--primary-color);
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--secondary-color);
+}
+
+
+/* Responsive Table */
+
+@media screen and (max-width: 768px) {
+    th,
+    td {
+        font-size: 14px;
+        padding: 10px;
+    }
+}

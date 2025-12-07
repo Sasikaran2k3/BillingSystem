@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Management</title>
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/SalesManager.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h2>SELVAM STORES (RETAIL)</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="./ProductManager">Product Manager</a>
+            <a href="./Customer">Customer Manager</a>
+            <a href="./BarcodeManager">BarCode Manager</a>
+            <a href="./">Invoice</a>
+            <a href="./Message">Message Manager</a>
+            <a href="./Analysis">Analytics Manager</a>
+
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title ">Sales Management</h1>
+        <div class="filter-group">
+            <label for="filterInvoiceId">Invoice ID:</label>
+            <input type="text" id="filterInvoiceId" placeholder="Enter Invoice ID" oninput="applyFilters()">
+
+            <label for="filterCustomerId">Customer ID:</label>
+            <input type="text" id="filterCustomerId" placeholder="Enter Customer ID" oninput="applyFilters()">
+
+            <label for="filterInvoiceDate">Invoice Date:</label>
+            <input type="date" id="filterInvoiceDate" oninput="applyFilters()">
+
+            <label for="filterTotalAmount">Total Amount:</label>
+            <input type="text" id="filterTotalAmount" placeholder="Enter Total Amount" oninput="applyFilters()">
+        </div>
+        <button onclick="window.location.href='/'"><img src="static/add.png" alt="Add" style="width:14px;height:14px;vertical-align:top;margin-right:5px;">Add Invoice</button>
+        <table id="invoiceTable">
+            <thead>
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Customer ID</th>
+                    <th>Invoice Date</th>
+                    <th>Total Amount</th>
+                    <th>Discount</th>
+                    <th>Net Total</th>
+                    <th>Created At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <button id="exportButton" onclick="exportTableToXLSX()">Export</button>
+    </div>
+    <script src="static/SalesManager.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+        async function exportTableToXLSX() {
+            const table = document.getElementById("invoiceTable");
+            if (!table) {
+                alert("Table not found!");
+                return;
+            }
+
+            const rows = table.querySelectorAll("tbody tr");
+            const data = [];
+
+            for (const row of rows) {
+                if (row.id === "totalRow") continue; // Skip total row if any
+
+                const cells = row.querySelectorAll("td");
+                const rowData = [];
+
+                for (const cell of cells) {
+                    rowData.push(cell.textContent.trim());
+                }
+
+                if (rowData.length > 0) {
+                    data.push(rowData);
+                }
+            }
+
+            if (data.length === 0) {
+                alert("No data available to export!");
+                return;
+            }
+
+            // Create worksheet
+            const worksheet = XLSX.utils.aoa_to_sheet([
+                Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim()),
+                ...data
+            ]);
+
+            // Create workbook
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+            // Export to file
+            XLSX.writeFile(workbook, "InvoiceData.xlsx");
+        }
+    </script>
+</body>
+
+</html>

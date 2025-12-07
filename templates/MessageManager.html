@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Management</title>
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/MessageManager.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h2>SELVAM STORES (RETAIL)</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="./ProductManager">Product Manager</a>
+            <a href="./">Invoice</a>
+            <a href="./SalesManager">Sales Manager</a>
+            <a href="./BarcodeManager">BarCode Manager</a>
+            <a href="./Customer">Customer Manager</a>
+            <a href="./Analysis">Analytics Manager</a>
+
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title">Message Management</h1>
+        <div class="filter-group">
+            <label for="filterMessageId">Message ID:</label>
+            <input type="text" id="filterMessageId" placeholder="Enter Message ID" oninput="applyFilters()">
+
+            <label for="filterEvent">Event:</label>
+            <input type="text" id="filterEvent" placeholder="Enter Event" oninput="applyFilters()">
+
+            <label for="filterMessage">Message:</label>
+            <input type="text" id="filterMessage" placeholder="Enter Message" oninput="applyFilters()">
+        </div>
+        <button onclick="showAddPopup()"><img src="static/add.png" alt="Add" style="width:14px;height:14px;vertical-align:top;margin-right:5px;">Add Message</button>
+        <table id="messageTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Event</th>
+                    <th>Message</th>
+                    <th>Action</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Update Message Pop-up Structure -->
+    <div id="updatePopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Update Message</h2>
+            <form id="updateForm">
+                <label for="updateMessageId">Message ID:</label>
+                <input type="text" id="updateMessageId" readonly><br>
+
+                <label for="updateEvent">Event:</label>
+                <input type="text" id="updateEvent"><br>
+
+                <label for="updateMessage">Message:</label>
+                <input type="text" id="updateMessage"><br>
+
+                <button type="button" onclick="updatemessage()">Update</button>
+                <button type="button" onclick="deleteProduct()" style="background-color: red; color: white;">Delete</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Message Pop-up Structure -->
+    <div id="addPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Add Message</h2>
+            <form id="addForm">
+                <label for="addEvent">Event:</label>
+                <input type="text" id="addEvent"><br>
+
+                <label for="addMessage">Message:</label>
+                <input type="text" id="addMessage"><br>
+
+                <button type="button" onclick="addmessage()">Add</button>
+            </form>
+        </div>
+    </div>
+    <div id="toast" class="toast">
+        <div class="toast-content">
+            <span class="toast-message">This is an error message!</span>
+        </div>
+    </div>
+    <script src="static/MessageManager.js"></script>
+</body>
+
+</html>

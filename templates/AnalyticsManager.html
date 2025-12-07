@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Management</title>
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/AnalysisManager.css">
+</head>
+ 
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h2>SELVAM STORES (RETAIL)</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="./ProductManager">Product Manager</a>
+            <a href="./Customer">Customer Manager</a>
+            <a href="./BarcodeManager">BarCode Manager</a>
+            <a href="./">Invoice</a>
+            <a href="./Message">Message Manager</a>
+            <a href="./SalesManager">Sales Manager</a>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title">Analysis Management</h1>
+        <!-- Filter controls will be dynamically created by JS -->
+        <table id="invoiceTable">
+            <!-- Table content will be dynamically created by JS -->
+        </table>
+        <button id="exportButton" onclick="exportTableToXLSX()">Export</button>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="static/AnalysisManager.js"></script>
+    <script>
+        async function exportTableToXLSX() {
+            const table = document.getElementById("invoiceTable");
+            if (!table) {
+                alert("Table not found!");
+                return;
+            }
+
+            const rows = table.querySelectorAll("tbody tr");
+            const data = [];
+
+            for (const row of rows) {
+                if (row.id === "totalRow") continue; // Skip total row if any
+
+                const cells = row.querySelectorAll("td");
+                const rowData = [];
+
+                for (const cell of cells) {
+                    rowData.push(cell.textContent.trim());
+                }
+
+                if (rowData.length > 0) {
+                    data.push(rowData);
+                }
+            }
+
+            if (data.length === 0) {
+                alert("No data available to export!");
+                return;
+            }
+
+            // Create worksheet
+            const worksheet = XLSX.utils.aoa_to_sheet([
+                Array.from(table.querySelectorAll("thead th")).map(th => th.textContent.trim()),
+                ...data
+            ]);
+
+            // Create workbook
+            const workbook = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+
+            // Export to file
+            XLSX.writeFile(workbook, "InvoiceData.xlsx");
+        }
+    </script>
+</body>
+
+</html>

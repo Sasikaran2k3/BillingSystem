@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barcode Manager</title>
+    <link rel="stylesheet" href="static/colors.css">
+    <link rel="stylesheet" href="static/BarcodeManager.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <h2>SELVAM STORES (RETAIL)</h2>
+        </div>
+        <div class="navbar-right">
+            <a href="./ProductManager">Product Manager</a>
+            <a href="./Customer">Customer Manager</a>
+            <a href="./SalesManager">Sales Manager</a>
+            <a href="./">Invoice</a>
+            <a href="./Message">Message Manager</a>
+            <a href="./Analysis">Analytics Manager</a>
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">Barcode Manager</h1>
+        </div>
+        <form id="invoiceForm">
+            <div class="search-container">
+                <input type="text" id="barCode" placeholder="Barcode..." >
+                <input type="text" id="productId" placeholder="Product ID ...">
+                <input type="text" id="productName" placeholder="Product Name...">
+                <input type="number" id="productQty" placeholder="Qty..." min="1">
+            </div>
+            <table id="lineItems">
+                <thead>
+                    <tr>
+                        <th>Product Code</th>
+                        <th>Product Name</th>
+                        <th>Unit Price</th>
+                        <th>MRP</th>
+                        <th>Qty</th>
+                        <th>Manifacturing Date</th>
+                        <th>Expiry Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Line items will be added here dynamically -->
+                </tbody>
+            </table>
+            <br>  
+            <button type="submit" id="createInvoiceBtn">               
+                <img src="static/printer.png" alt="Print" style="width:14px;height:14px;vertical-align:middle;margin-right:5px;">Print
+            </button>
+            <button type = "button" onclick="window.location.href='/BarcodeManager'" style="float: right;">                        
+                <img src="static/broom.png" alt="Clear" style="width:16px;height:16px;vertical-align:middle;"> Clear
+            </button> <!-- Added Clear button -->
+        </form>
+    </div>
+    
+    <!-- Suggestion Box for Customers -->
+    <div id="sideMenu">
+        <div id="suggestionsDiv" class="side-menu"></div>
+    </div>
+    
+    <script src="static/BarcodeManager.js"></script>
+    
+    
+    
+</body>
+</html>

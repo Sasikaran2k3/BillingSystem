@@ -2,101 +2,155 @@ body {
     font-family: Arial, sans-serif;
     line-height: 1.6;
     margin: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color, #f4f4f4);
 }
+
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
     background: white;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: start;
     margin-bottom: 20px;
 }
+
 .invoice-details {
     text-align: right;
+    position: relative;
 }
+
+.invoice-details button {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: #ff5733;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
 h1 {
     color: #333;
     margin: 0;
 }
+
 .form-group {
     margin-bottom: 15px;
 }
+
 label {
     display: block;
     margin-bottom: 5px;
 }
-input[type="text"], input[type="number"], input[type="date"] {
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
     width: 100%;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
 }
+
 button {
-    background-color: #4CAF50;
+    background-color: var(--primary-color);
     color: white;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
 }
+
 button:hover {
-    background-color: #45a049;
+    background-color: var(--secondary-color);
 }
+
 table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
-th, td {
+
+th,
+td {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
 }
+
 th {
     background-color: #f2f2f2;
 }
+
 .search-container {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
 }
+
 .search-container input {
     flex: 1;
 }
-#suggestions {
-    position: absolute;
-    top: 100%;
-    left: 0;
+
+#sideMenu {
+    position: fixed;
+    top: 0;
     right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-top: none;
-    max-height: 150px;
+    width: 30%;
+    /* Adjust width as needed */
+    height: 80%;
+    top: 20%;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ddd;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
+    z-index: 1000;
+    padding: 20px;
     display: none;
 }
-.suggestion {
-    padding: 8px;
-    cursor: pointer;
+
+#suggestionsDiv {
+    background: white;
+    border: none;
+    /* Remove border since it's now in a side menu */
+    max-height: 100%;
+    display: block;
 }
-.suggestion:hover {
-    background-color: #f0f0f0;
+
+.suggestion {
+    padding: 12px 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+.suggestion:hover,
+.selected {
+    background-color: #d0d0d0;
 }
 
 
 /* Highlight Total Amount */
-#totalAmount, #netTotal{
+
+#totalAmount,
+#Balance,
+#netTotal {
     font-weight: bold;
-    color: #FF5733; /* Vibrant color for emphasis */
-    font-size: 1.2em; /* Slightly larger text */
+    color: #FF5733;
+    /* Vibrant color for emphasis */
+    font-size: 1.2em;
+    /* Slightly larger text */
     padding: 5px;
 }
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -119,4 +173,117 @@ th {
 .navbar-right a:hover {
     background-color: #575757;
     border-radius: 5px;
+}
+
+.mode-of-payment , .miscellaneous {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Space between the elements */
+}
+
+.mode-of-payment label, .miscellaneous label {
+    margin-right: 5px;
+    /* Space between label and input */
+}
+
+.mode-of-payment input, .miscellaneous input {
+    flex: 1;
+    /* Adjust width as needed */
+}
+
+
+/* Existing styles ... */
+
+.content-wrapper {
+    display: flex;
+    align-items: flex-start;
+}
+
+.total-summary {
+    text-align: left;
+    margin-right: 20px;
+    margin-top: 20px;
+}
+
+.total-summary div {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+/* Highlight Total Amount */
+
+#displayTotalAmount,
+#netTotal {
+    font-weight: bold;
+    color: #FF5733;
+    /* Vibrant color for emphasis */
+    font-size: 1.2em;
+    /* Slightly larger text */
+    padding: 5px;
+}
+
+.title {
+    color: #333;
+    font-size: 3em;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    margin: 0;
+    margin-bottom: 25px;
+}
+
+input[type="text"], input[type="number"], input[type="date"] {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: #444444;
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #ff4444;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.toast-message {
+    margin-left: 10px;
 }
